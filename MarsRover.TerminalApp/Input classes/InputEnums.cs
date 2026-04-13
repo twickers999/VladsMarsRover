@@ -8,13 +8,12 @@ namespace MarsRover.TerminalApp
 {
     public  class InputEnums
     {
-        public enum Instruction
+        public enum Instructs
         {
             L,
             R,
             M
         }
-
         public enum CompassDirection
         {
             N,
