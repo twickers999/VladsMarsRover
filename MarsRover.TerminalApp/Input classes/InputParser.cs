@@ -11,7 +11,7 @@ namespace MarsRover.TerminalApp.Input_classes
 {
     public class InputParser
     {
-        public static List<Instructs> InstructionParser(string inputString) 
+        public static List<Instructs> InstructionParser(string inputString)
         {
             List<Instructs> instructsList = inputString.ToUpper().Where(x => x == 'L' || x == 'R' || x == 'M')
             .Select(x => Enum.Parse<Instructs>(x.ToString()))
@@ -39,15 +39,24 @@ namespace MarsRover.TerminalApp.Input_classes
             //    }
             //}
         }
-        
+        public static InputClasses.Plateau PlateauParser(string inputString)
+        {
+            string[] splitInput = inputString.Split(' ');
+            int xAxis = int.Parse(splitInput[0]);
+            int yAxis = int.Parse(splitInput[1]);
 
-        //public InputClasses.Plateau PlateauParser(string inputString)
-        //{
-        //    string[] splitInput = inputString.Split(' ');
-        //    int xCoord = (int)splitInput[0];
-        //    int yCoord = (int)splitInput[1];
-        //   return InputClasses.Plateau(xCoord, yCoord);
-           
-        //}
+            return new InputClasses.Plateau(xAxis, yAxis);
+
+        }
+        public static InputClasses.Position PositionParser(string inputString)
+        {
+            string[] splitInput = inputString.Split(' ');
+            int xCoord = int.Parse(splitInput[0]);
+            int yCoord = int.Parse(splitInput[1]);
+            CompassDirection orientation = CompassDirection.Parse<CompassDirection>(splitInput[2]);
+
+            return new InputClasses.Position(xCoord, yCoord, orientation);
+
+        }
     }
 }
