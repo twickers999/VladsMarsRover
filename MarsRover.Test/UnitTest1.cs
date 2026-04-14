@@ -8,6 +8,7 @@ namespace MarsRover.Test
 {
     public class Tests
     {
+        InputParser parser = new InputParser();
 
         [Test]
 
@@ -18,7 +19,8 @@ namespace MarsRover.Test
             List<Instructs> expectedList = 
                 new List<Instructs> { Instructs.L, Instructs.L, Instructs.L, Instructs.R, Instructs.R, Instructs.M, Instructs.M };
 
-            var output = InputParser.InstructionParser(testString);
+            InputParser parser = new InputParser();
+            var output = parser.InstructionParser(testString);
 
             Assert.That(output, Is.EquivalentTo(expectedList));
         }
@@ -29,8 +31,8 @@ namespace MarsRover.Test
 
             List<Instructs> expectedList =
                  new List<Instructs> { Instructs.L, Instructs.L, Instructs.L, Instructs.R, Instructs.R, Instructs.M, Instructs.M };
-
-            var output = InputParser.InstructionParser(testString);
+            
+            var output = parser.InstructionParser(testString);
 
             Assert.That(output, Is.EquivalentTo(expectedList));
         }
@@ -38,11 +40,12 @@ namespace MarsRover.Test
         public void TurnsStringIntopostion()
         {
             string testString = "1 1 N";
-            InputClasses.Position output =
-            InputParser.PositionParser(testString);
 
-            InputClasses.Position expectedval = new
-            InputClasses.Position(1, 1, CompassDirection.N);
+          Position output =
+            parser.PositionParser(testString);
+
+            Position expectedval = new
+            Position(1, 1, CompassDirection.N);
 
             Assert.That(output, Is.EqualTo(expectedval));
         }
@@ -51,11 +54,11 @@ namespace MarsRover.Test
         public void TurnsStringIntoPlateau()
         {
             string testString = "10 10";
-            InputClasses.Plateau output =
-            InputParser.PlateauParser(testString);
+           Plateau output =
+            parser.PlateauParser(testString);
 
-            InputClasses.Plateau expectedval = new
-            InputClasses.Plateau(10, 10);
+            Plateau expectedval = new
+            Plateau(10, 10);
 
             Assert.That(output, Is.EqualTo(expectedval));
         }

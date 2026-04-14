@@ -12,7 +12,7 @@ namespace MarsRover.TerminalApp.Input_classes
 
     public record Plateau(int xAxis, int yAxis);
         
-    public record Instruction(Instructs instructs);
+    public record Instruction(List<Instructs> instructs);
 
     public class InputClasses
     {

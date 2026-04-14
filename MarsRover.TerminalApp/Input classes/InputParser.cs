@@ -17,13 +17,6 @@ namespace MarsRover.TerminalApp.Input_classes
         public bool PositionIsValid { get; set; } = false;
         public bool InstructionIsValid { get; set; } = false;
 
-        //public InputClasses(bool plateauIsValid, bool positionIsValid, bool instructionIsValid)
-        //{
-        //    InstructionIsValid = instructionIsValid;
-        //    PositionIsValid = positionIsValid;
-        //    PlateauIsValid = plateauIsValid;
-        //}
-
         public void PlateauIsValidCheck(string input)
         {
             if (Regex.IsMatch(input, @"^(\d +)\s + (\d +)$"))
@@ -52,11 +45,11 @@ namespace MarsRover.TerminalApp.Input_classes
             .Select(x => Enum.Parse<Instructs>(x.ToString()))
             .ToList();
 
-            List<Instruction> instructionList = new List<Instruction>();
-            foreach (var instruct in instructsList)
-            {
-                instructionList.Add(new Instruction(instruct));
-            }
+            //List<Instruction> instructionList = new List<Instruction>();
+            //foreach (var instruct in instructsList)
+            //{
+            //    instructionList.Add(new Instruction(instruct));
+            //}
             return instructsList;
             //foreach (var item in letterArray)
             //{

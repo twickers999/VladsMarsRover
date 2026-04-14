@@ -6,5 +6,3 @@ using MarsRover.TerminalApp.RoverLogic;
 Console.WriteLine("hello" + "▼");
 
 Logic.PrintExes(70, 70);
-
-InputClasses currentInput = new InputClasses(false, false, false);
