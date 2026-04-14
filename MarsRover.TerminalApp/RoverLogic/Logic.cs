@@ -9,9 +9,11 @@ namespace MarsRover.TerminalApp.RoverLogic
 {
     internal class Logic
     {
+       
+
         public void CreatePlateau()
         {
-            //new InputClasses.Plateau();
+           
 
         }
     

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static MarsRover.TerminalApp.Input_classes.InputClasses;
 using static MarsRover.TerminalApp.InputEnums;
@@ -11,7 +12,41 @@ namespace MarsRover.TerminalApp.Input_classes
 {
     public class InputParser
     {
-        public static List<Instructs> InstructionParser(string inputString)
+
+        public bool PlateauIsValid { get; set; } = false;
+        public bool PositionIsValid { get; set; } = false;
+        public bool InstructionIsValid { get; set; } = false;
+
+        //public InputClasses(bool plateauIsValid, bool positionIsValid, bool instructionIsValid)
+        //{
+        //    InstructionIsValid = instructionIsValid;
+        //    PositionIsValid = positionIsValid;
+        //    PlateauIsValid = plateauIsValid;
+        //}
+
+        public void PlateauIsValidCheck(string input)
+        {
+            if (Regex.IsMatch(input, @"^(\d +)\s + (\d +)$"))
+            {
+                PlateauIsValid = true;
+            }
+        }
+        public void PostionIsValidCheck(string input)
+        {
+            if (Regex.IsMatch(input, @"^(\d+)\s+(\d+)\s+([NSEW])$"))
+            {
+                PositionIsValid = true;
+            }
+        }
+        public void InstructionIsValidCheck(string input)
+        {
+            if (Regex.IsMatch(input, @"^([LRM]+),?$"))
+            {
+                InstructionIsValid = true;
+            }
+        }
+
+        public  List<Instructs> InstructionParser(string inputString)
         {
             List<Instructs> instructsList = inputString.ToUpper().Where(x => x == 'L' || x == 'R' || x == 'M')
             .Select(x => Enum.Parse<Instructs>(x.ToString()))
@@ -39,23 +74,23 @@ namespace MarsRover.TerminalApp.Input_classes
             //    }
             //}
         }
-        public static InputClasses.Plateau PlateauParser(string inputString)
+        public Plateau PlateauParser(string inputString)
         {
-            string[] splitInput = inputString.Split(' ');
-            int xAxis = int.Parse(splitInput[0]);
-            int yAxis = int.Parse(splitInput[1]);
+              string[] splitInput = inputString.Split(' ');
+                int xAxis = int.Parse(splitInput[0]);
+                int yAxis = int.Parse(splitInput[1]);
 
-            return new InputClasses.Plateau(xAxis, yAxis);
-
+                return new Plateau(xAxis, yAxis);
+            
         }
-        public static InputClasses.Position PositionParser(string inputString)
+        public  Position PositionParser(string inputString)
         {
             string[] splitInput = inputString.Split(' ');
             int xCoord = int.Parse(splitInput[0]);
             int yCoord = int.Parse(splitInput[1]);
             CompassDirection orientation = CompassDirection.Parse<CompassDirection>(splitInput[2]);
 
-            return new InputClasses.Position(xCoord, yCoord, orientation);
+            return new Position(xCoord, yCoord, orientation);
 
         }
     }
