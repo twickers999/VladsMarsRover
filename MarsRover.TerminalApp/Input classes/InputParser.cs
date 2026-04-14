@@ -12,31 +12,34 @@ namespace MarsRover.TerminalApp.Input_classes
 {
     public class InputParser
     {
-
         public bool PlateauIsValid { get; set; } = false;
         public bool PositionIsValid { get; set; } = false;
         public bool InstructionIsValid { get; set; } = false;
 
-        public void PlateauIsValidCheck(string input)
+        public bool PlateauIsValidCheck(string input)
         {
-            if (Regex.IsMatch(input, @"^(\d +)\s + (\d +)$"))
-            {
-                PlateauIsValid = true;
-            }
+        
+            bool check = Regex.IsMatch(input, @"^\d +\s + \d +$");
+
+            PositionIsValid = check;
+
+            return check;
         }
-        public void PostionIsValidCheck(string input)
+        public bool PostionIsValidCheck(string input)
         {
-            if (Regex.IsMatch(input, @"^(\d+)\s+(\d+)\s+([NSEW])$"))
-            {
-                PositionIsValid = true;
-            }
+            bool check = Regex.IsMatch(input, @"^(\d+)\s+(\d+)\s+([NSEW])$");
+        
+            PositionIsValid = check;
+
+            return check;
         }
-        public void InstructionIsValidCheck(string input)
+        public bool InstructionIsValidCheck(string input)
         {
-            if (Regex.IsMatch(input, @"^([LRM]+),?$"))
-            {
-                InstructionIsValid = true;
-            }
+            bool check = Regex.IsMatch(input, @"^([LRM]+),?$")
+
+            PositionIsValid = check;
+
+            return check;
         }
 
         public  List<Instructs> InstructionParser(string inputString)

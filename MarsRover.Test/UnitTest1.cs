@@ -76,10 +76,16 @@ namespace MarsRover.Test
            string output1 = "1 3 N";
            string output2 = "5 1 E";
 
+        }
 
+        [Test]
+        public void ChecksPlateauIsValidInput()
+        {
+            string testString = "10 10";
+            
+            bool output = parser.PlateauIsValidCheck(testString);
 
-
-
+            Assert.That(output, Is.EqualTo(true));
         }
     }
 

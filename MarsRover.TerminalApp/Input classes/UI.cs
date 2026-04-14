@@ -10,12 +10,6 @@ namespace MarsRover.TerminalApp.Input_classes
 {
     public class UI
     {
-        public void StartUp()
-        {
-
-            var builder = new Rover.Builder();
-        }
-
             bool isValidPlateau = false;
             string UserInputPlateau = "";
 
@@ -26,6 +20,23 @@ namespace MarsRover.TerminalApp.Input_classes
             string UserInputinstruction = "";
 
             InputParser newParser = new InputParser();
+        public void StartUp()
+        {
+            PlateauInput();
+            if (isValidPlateau)
+            {
+                PositionInput();
+            }
+            if (isValidPosition)
+            {
+                InstructionInput();
+            }
+            if (isValidInstruction)
+            {
+                BuildRover();
+            }
+        }
+            
         public void PlateauInput() {
 
             while (isValidPlateau == false)
@@ -42,6 +53,7 @@ namespace MarsRover.TerminalApp.Input_classes
                 }
                 else { Console.WriteLine("The input is invalid"); }
             }
+           
 
         }
         public void PositionInput()

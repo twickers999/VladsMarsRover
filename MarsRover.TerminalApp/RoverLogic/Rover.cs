@@ -6,16 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using static MarsRover.TerminalApp.Input_classes.InputClasses;
 
+using static MarsRover.TerminalApp.InputEnums;
+
+
 namespace MarsRover.TerminalApp.RoverLogic
 {
     public class Rover
     {
         public readonly Position position;
 
-        public readonly Instruction instruction;
+        public readonly List<Instructs> instruction;
 
         public readonly Plateau plateau;
-        public Rover(Position _position,Instruction _instruction, Plateau _plateau)
+        public Rover(Position _position, List<Instructs> _instruction, Plateau _plateau)
         {
             this.instruction = _instruction;
             this.position = _position;
@@ -26,7 +29,7 @@ namespace MarsRover.TerminalApp.RoverLogic
         {
             public Position Position { get; set; }
 
-            public Instruction Instruction { get; set; }
+            public List<Instructs> Instruction { get; set; }
 
             public Plateau Plateau { get; set; }
 
@@ -42,7 +45,7 @@ namespace MarsRover.TerminalApp.RoverLogic
                 this.Position = position;
                 return this;
             }
-            public Builder AddInstruction(Instruction instruction)
+            public Builder AddInstruction(List<Instructs> instruction)
             {
                 this.Instruction = instruction;
                 return this;

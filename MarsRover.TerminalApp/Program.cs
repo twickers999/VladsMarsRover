@@ -3,6 +3,7 @@
 using MarsRover.TerminalApp.Input_classes;
 using MarsRover.TerminalApp.RoverLogic;
 
-Console.WriteLine("hello" + "▼");
 
-Logic.PrintExes(70, 70);
+UI ui = new UI();
+ui.StartUp();
+//Logic.PrintExes(, );
