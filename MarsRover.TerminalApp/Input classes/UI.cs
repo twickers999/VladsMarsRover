@@ -12,7 +12,7 @@ namespace MarsRover.TerminalApp.Input_classes
     {
         public void StartUp()
         {
-            
+           Rover CurrentRover = new Rover() ;
 
         }
 
