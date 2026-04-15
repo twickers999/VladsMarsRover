@@ -20,7 +20,10 @@ namespace MarsRover.TerminalApp.Input_classes
        "5 5",
        "1 2 N",
        "LMLMLMLMM",
-
             ];
+        public TestingToggle(bool testingOn)
+        {
+            TestingOn = testingOn;
+        }
     }
 }

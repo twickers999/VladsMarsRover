@@ -14,7 +14,7 @@ namespace MarsRover.TerminalApp.Input_classes
 
             public InputParser newParser = new InputParser();
 
-            public TestingToggle toggle = new TestingToggle();
+            public TestingToggle toggle = new TestingToggle(false);
 
         public void StartUp()
         {
@@ -46,7 +46,6 @@ namespace MarsRover.TerminalApp.Input_classes
                 "Please Create a plateau in format (int int) e.g. 7 7",
                 "Please Select a rover position in format (int int orientation) e.g. 2 2 W",
                 "Please input instructions as a string of Characters e.g. LLRRMMM",
-
             ];
 
             Console.WriteLine(textPrompts[code]);
@@ -57,9 +56,7 @@ namespace MarsRover.TerminalApp.Input_classes
 
             //var inputTask = Task.Run(() => Console.ReadLine());
             //var delayTask = Task.Delay(10000); // 10 seconds
-
             //var completedTask = await Task.WhenAny(inputTask, delayTask);
-
             //if (completedTask == inputTask)
             //{
             //    return inputTask.Result;
@@ -137,7 +134,5 @@ namespace MarsRover.TerminalApp.Input_classes
                             .Build();
             return RoverA;
         }
-    
-
     }
 }

@@ -1,8 +1,9 @@
 using MarsRover.TerminalApp.Input_classes;
+using MarsRover.TerminalApp.RoverLogic;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Shouldly;
 using System.Diagnostics.CodeAnalysis;
 using static MarsRover.TerminalApp.InputEnums;
-using Shouldly;
 
 namespace MarsRover.Test
 {
@@ -143,24 +144,24 @@ namespace MarsRover.Test
                 Assert.That(output, Is.EqualTo(false));
             }
         }
-   public class Tests3
-            {
+    public class Tests3
+    {
 
         [Test]
-        public  void RequestsText()
+        public void RequestsText()
         {
             UI ui = new UI();
-            string userInput =  ui.RequestUserInput(2);
+            string userInput = ui.RequestUserInput(2);
             Assert.That(userInput, Is.EqualTo(""));
         }
         [Test]
 
-        public void PlateauInputChecker() 
+        public void PlateauInputChecker()
         {
             UI ui = new UI();
-            var output =  ui.PlateauInput(ui.newParser.PlateauIsValid, ui.StringObject);
+            var output = ui.PlateauInput(ui.newParser.PlateauIsValid, ui.StringObject);
             Assert.That(ui.StringObject.PlateauStr, Is.EqualTo("9 9"));
-            
+
         }
 
 
@@ -168,18 +169,12 @@ namespace MarsRover.Test
         //public void ChecksInputedInstructionIsValidInput()
         //{
         //         UI ui = new UI();
-
         // //ui.StringObject.PlateauStr = "7 7";
         // ui.newParser.PlateauIsValid = true;
         // var output = ui.PlateauInput(ui.newParser.PlateauIsValid, ui.StringObject);
-
         // Assert.That(output, Is.EqualTo("7 7"));
-
-
         //}
-
         //[Test]
-
         //public void ParserReturns2Rovers()
         //{
         //    InputParser parser = new InputParser();
@@ -188,11 +183,35 @@ namespace MarsRover.Test
         //    string firstInstructions = "LMLMLMLMM";
         //    string secondRover = "3 3 E";
         //    string secondInstructions = "MMRMMRMRRM";
-
         //    string output1 = "1 3 N";
         //    string output2 = "5 1 E";
-
         //}
+        [Test]
+
+        public void PlateauInputValidator()
+        {
+            UI ui = new UI();  
+         string testPlateau = "5 5";
+         string firstRover = "1 2 N";
+         string firstInstructions = "LMLMLMLMM";
+         string secondRover = "3 3 E";
+         string secondInstructions = "MMRMMRMRRM";
+
+         string[] inputMocks = [
+               "5 5",
+               "1 2 N",
+               "LMLMLMLMM",
+              ];
+
+            Rover rover = new Rover.Builder()
+                            .AddPlateau(ui.newParser.PlateauParser(testPlateau))
+                            .AddPosition(ui.newParser.PositionParser(firstRover))
+                            .AddInstruction(ui.newParser.InstructionParser(firstInstructions))
+                            .Build();
+            rover = Logic.BlackBox(rover);
+            
+        }
+    
     }
     
 }

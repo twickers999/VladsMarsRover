@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MarsRover.TerminalApp.Input_classes;
 
 using static MarsRover.TerminalApp.InputEnums;
 
@@ -56,4 +55,6 @@ namespace MarsRover.TerminalApp.RoverLogic
             }
         }
     }
-}
+    
+    
+    }
