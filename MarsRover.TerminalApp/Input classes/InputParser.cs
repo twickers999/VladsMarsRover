@@ -5,29 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static MarsRover.TerminalApp.Input_classes.InputClasses;
+using MarsRover.TerminalApp.Input_classes;
 using static MarsRover.TerminalApp.InputEnums;
 
 namespace MarsRover.TerminalApp.Input_classes
 {
     public class InputParser
     {
-        public bool PlateauIsValid { get; set; } = false;
-        public bool PositionIsValid { get; set; } = false;
-        public bool InstructionIsValid { get; set; } = false;
+        public bool PlateauIsValid { get; set; } 
+        public bool PositionIsValid { get; set; } 
+        public bool InstructionIsValid { get; set; } 
+
+        public InputParser()
+        {
+            PlateauIsValid = false;
+            PositionIsValid = false;
+            InstructionIsValid = false;
+        }
 
         public bool PlateauIsValidCheck(string input)
         {
-        
-            bool check = Regex.IsMatch(input, @"^\d +\s + \d +$");
+            bool check = Regex.IsMatch(input, @"^\d+\s+\d+$");
 
-            PositionIsValid = check;
+            PlateauIsValid = check;
 
             return check;
         }
-        public bool PostionIsValidCheck(string input)
+        public bool PositionIsValidCheck(string input)
         {
-            bool check = Regex.IsMatch(input, @"^(\d+)\s+(\d+)\s+([NSEW])$");
+            bool check = Regex.IsMatch(input, @"^(\d+)\s+(\d+)\s+([NSEWnesw])$");
         
             PositionIsValid = check;
 
@@ -35,9 +41,9 @@ namespace MarsRover.TerminalApp.Input_classes
         }
         public bool InstructionIsValidCheck(string input)
         {
-            bool check = Regex.IsMatch(input, @"^([LRM]+),?$")
+            bool check = Regex.IsMatch(input, @"^\s*([LRMlrm]+)\s*,?\s*$");
 
-            PositionIsValid = check;
+            InstructionIsValid = check;
 
             return check;
         }
@@ -47,7 +53,6 @@ namespace MarsRover.TerminalApp.Input_classes
             List<Instructs> instructsList = inputString.ToUpper().Where(x => x == 'L' || x == 'R' || x == 'M')
             .Select(x => Enum.Parse<Instructs>(x.ToString()))
             .ToList();
-
             //List<Instruction> instructionList = new List<Instruction>();
             //foreach (var instruct in instructsList)
             //{
@@ -77,7 +82,6 @@ namespace MarsRover.TerminalApp.Input_classes
                 int yAxis = int.Parse(splitInput[1]);
 
                 return new Plateau(xAxis, yAxis);
-            
         }
         public  Position PositionParser(string inputString)
         {

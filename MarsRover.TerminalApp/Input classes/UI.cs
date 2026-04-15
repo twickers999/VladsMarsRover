@@ -10,98 +10,132 @@ namespace MarsRover.TerminalApp.Input_classes
 {
     public class UI
     {
-            bool isValidPlateau = false;
-            string UserInputPlateau = "";
+            public InputStringObject StringObject = new InputStringObject();
 
-            bool isValidPosition = false;
-            string UserInputPosition = "";
+            public InputParser newParser = new InputParser();
 
-            bool isValidInstruction = false;
-            string UserInputinstruction = "";
+            public TestingToggle toggle = new TestingToggle();
 
-            InputParser newParser = new InputParser();
         public void StartUp()
         {
-            PlateauInput();
-            if (isValidPlateau)
+            if (!newParser.PlateauIsValid)
             {
-                PositionInput();
-            }
-            if (isValidPosition)
-            {
-                InstructionInput();
-            }
-            if (isValidInstruction)
-            {
-                BuildRover();
+                 PlateauInput(newParser.PlateauIsValid, StringObject);
+
+                if (newParser.PlateauIsValid && !newParser.PositionIsValid)
+                {
+                     PositionInput(newParser.PositionIsValid, StringObject);
+
+                    if (newParser.PositionIsValid)
+                    {
+                         InstructionInput(newParser.InstructionIsValid, StringObject);
+
+                        if (newParser.InstructionIsValid)
+                        {
+                            BuildRover();
+                        }
+                    }
+                }
             }
         }
-            
-        public void PlateauInput() {
+        public string RequestUserInput(int code)
+        {
+            string[] textPrompts =
+            [
+                "Hello",
+                "Please Create a plateau in format (int int) e.g. 7 7",
+                "Please Select a rover position in format (int int orientation) e.g. 2 2 W",
+                "Please input instructions as a string of Characters e.g. LLRRMMM",
 
-            while (isValidPlateau == false)
+            ];
+
+            Console.WriteLine(textPrompts[code]);
+            string UserInput = "";
+            if (toggle.TestingOn) { UserInput = toggle.inputMocks[code-1]; }
+            else { UserInput = Console.ReadLine(); }
+            return UserInput;
+
+            //var inputTask = Task.Run(() => Console.ReadLine());
+            //var delayTask = Task.Delay(10000); // 10 seconds
+
+            //var completedTask = await Task.WhenAny(inputTask, delayTask);
+
+            //if (completedTask == inputTask)
+            //{
+            //    return inputTask.Result;
+            //}
+            //else
+            //{
+            //    Console.WriteLine("You are taking too long");
+            //    return "";
+            //}
+        }
+        public string PlateauInput(bool plateauIsValid, InputStringObject stringObject ) {
+            while (plateauIsValid == false)
             {
-                Console.WriteLine("Please Create a plateau in format (int int) e.g. 7 7");
-
-                string UserInputPlateau = Console.ReadLine();
-
-                newParser.PlateauIsValidCheck(UserInputPlateau);
-
-                if (newParser.PlateauIsValid)
+                string userInput =  RequestUserInput(1);
+                if(userInput == "")
                 {
-                    isValidPlateau = true;
+                    userInput = "9 9";
+                }
+                stringObject.PlateauStr = userInput;
+                if (newParser.PlateauIsValidCheck(stringObject.PlateauStr))
+                {
+                    plateauIsValid = true;
+                    newParser.PlateauIsValid = true;
                 }
                 else { Console.WriteLine("The input is invalid"); }
             }
-           
-
+            return stringObject.PlateauStr;
         }
-        public void PositionInput()
+        public string PositionInput(bool isValidPosition, InputStringObject stringObject)
         {
             while (isValidPosition == false)
             {
-                Console.WriteLine("Please Select a rover position in format (int int orientation) e.g. 2 2 W");
+                string userInput =  RequestUserInput(2);
+                if (userInput == "")
+                {
+                    userInput = "0 0 N";
+                }
+                stringObject.PositionStr = userInput;
 
-                string UserInputPosition = Console.ReadLine();
-
-                newParser.PlateauIsValidCheck(UserInputPosition);
-
-                if (newParser.PositionIsValid)
+                if (newParser.PositionIsValidCheck(StringObject.PositionStr))
                 {
                     isValidPosition = true;
+                    newParser.PositionIsValid = true;
                 }
                 else { Console.WriteLine("The input is invalid"); }
             }
-
+            return StringObject.PositionStr;
         }
-        public void InstructionInput()
+        public string InstructionInput(bool isValidInstruction, InputStringObject stringObject)
         {
             while (isValidInstruction == false)
             {
-                Console.WriteLine("Please input instructions in format (LLLL) e.g. LLRRMMM");
+                string userInput = RequestUserInput(3);
+                if (userInput == "")
+                {
+                    userInput = "MMRRMMLL";
+                }
+                stringObject.InstructionStr = userInput;
 
-                string UserInputinstruction = Console.ReadLine();
-
-                newParser.PlateauIsValidCheck(UserInputinstruction);
-
-                if (newParser.InstructionIsValid)
+                if (newParser.InstructionIsValidCheck(StringObject.InstructionStr))
                 {
                     isValidInstruction = true;
+                    newParser.InstructionIsValid = true;
                 }
                 else { Console.WriteLine("The input is invalid"); }
             }
-
+            return StringObject.InstructionStr;
         }
-
         public Rover BuildRover()
         {
             Rover RoverA = new Rover.Builder()
-                            .AddPlateau(newParser.PlateauParser(UserInputPlateau))
-                            .AddPosition(newParser.PositionParser(UserInputPosition))
-                            .AddInstruction(newParser.InstructionParser(UserInputinstruction))
+                            .AddPlateau(newParser.PlateauParser(StringObject.PlateauStr))
+                            .AddPosition(newParser.PositionParser(StringObject.PositionStr))
+                            .AddInstruction(newParser.InstructionParser(StringObject.InstructionStr))
                             .Build();
-            return RoverA;  
-          
+            return RoverA;
         }
     
 

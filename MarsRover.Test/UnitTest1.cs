@@ -8,15 +8,13 @@ namespace MarsRover.Test
 {
     public class Tests
     {
-        InputParser parser = new InputParser();
-
         [Test]
 
         public void TurnsStringIntoInstruction()
         {
             string testString = "LLLRRMM";
-            
-            List<Instructs> expectedList = 
+
+            List<Instructs> expectedList =
                 new List<Instructs> { Instructs.L, Instructs.L, Instructs.L, Instructs.R, Instructs.R, Instructs.M, Instructs.M };
 
             InputParser parser = new InputParser();
@@ -27,11 +25,12 @@ namespace MarsRover.Test
         [Test]
         public void TurnsStringIntoInstruction2()
         {
+            InputParser parser = new InputParser();
             string testString = "LLqLRb RMM 3";
 
             List<Instructs> expectedList =
                  new List<Instructs> { Instructs.L, Instructs.L, Instructs.L, Instructs.R, Instructs.R, Instructs.M, Instructs.M };
-            
+
             var output = parser.InstructionParser(testString);
 
             Assert.That(output, Is.EquivalentTo(expectedList));
@@ -39,10 +38,11 @@ namespace MarsRover.Test
         [Test]
         public void TurnsStringIntopostion()
         {
+            InputParser parser = new InputParser();
             string testString = "1 1 N";
 
-          Position output =
-            parser.PositionParser(testString);
+            Position output =
+              parser.PositionParser(testString);
 
             Position expectedval = new
             Position(1, 1, CompassDirection.N);
@@ -53,40 +53,148 @@ namespace MarsRover.Test
         [Test]
         public void TurnsStringIntoPlateau()
         {
+            InputParser parser = new InputParser();
             string testString = "10 10";
-           Plateau output =
-            parser.PlateauParser(testString);
+            Plateau output =
+             parser.PlateauParser(testString);
 
             Plateau expectedval = new
             Plateau(10, 10);
 
             Assert.That(output, Is.EqualTo(expectedval));
         }
-
-        [Test]
-
-        public void ParserReturns2Rovers()
-        {
-           string testPlateau = " 5 5 ";
-           string firstRover = "1 2 N";
-           string firstInstructions = "LMLMLMLMM";
-           string secondRover = "3 3 E";
-           string secondInstructions =  "MMRMMRMRRM";
-
-           string output1 = "1 3 N";
-           string output2 = "5 1 E";
-
-        }
-
-        [Test]
-        public void ChecksPlateauIsValidInput()
-        {
-            string testString = "10 10";
-            
-            bool output = parser.PlateauIsValidCheck(testString);
-
-            Assert.That(output, Is.EqualTo(true));
-        }
     }
+    public class Tests2
+        {
 
+
+            [Test]
+            public void ChecksPlateauIsInValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "10 x1!";
+
+                bool output = parser.PlateauIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(false));
+            }
+            [Test]
+            public void ChecksPlateauIsValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "10 1";
+
+                bool output = parser.PlateauIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(true));
+
+                //UI ui = new UI();
+                //bool output2 = ui.PlateauInput();
+                //Assert.That(output2, Is.EqualTo(true));
+            }
+            [Test]
+            public void ChecksPositionIsInValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "1vvc 1w";
+
+                bool output = parser.PositionIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(false));
+            }
+            [Test]
+            public void ChecksPositionIsValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "1 1 w";
+
+                bool output = parser.PositionIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(true));
+            }
+            [Test]
+            public void ChecksInstructionIsValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "LLLLLR";
+
+                bool output = parser.InstructionIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(true));
+            }
+            [Test]
+            public void ChecksInstructionIsValidInput2()
+            {
+                InputParser parser = new InputParser();
+                string testString = "lllrr";
+
+                bool output = parser.InstructionIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(true));
+            }
+            [Test]
+            public void ChecksInstructionIsinValidInput()
+            {
+                InputParser parser = new InputParser();
+                string testString = "lll88rr";
+
+                bool output = parser.InstructionIsValidCheck(testString);
+
+                Assert.That(output, Is.EqualTo(false));
+            }
+        }
+   public class Tests3
+            {
+
+        [Test]
+        public  void RequestsText()
+        {
+            UI ui = new UI();
+            string userInput =  ui.RequestUserInput(2);
+            Assert.That(userInput, Is.EqualTo(""));
+        }
+        [Test]
+
+        public void PlateauInputChecker() 
+        {
+            UI ui = new UI();
+            var output =  ui.PlateauInput(ui.newParser.PlateauIsValid, ui.StringObject);
+            Assert.That(ui.StringObject.PlateauStr, Is.EqualTo("9 9"));
+            
+        }
+
+
+        // [Test]
+        //public void ChecksInputedInstructionIsValidInput()
+        //{
+        //         UI ui = new UI();
+
+        // //ui.StringObject.PlateauStr = "7 7";
+        // ui.newParser.PlateauIsValid = true;
+        // var output = ui.PlateauInput(ui.newParser.PlateauIsValid, ui.StringObject);
+
+        // Assert.That(output, Is.EqualTo("7 7"));
+
+
+        //}
+
+        //[Test]
+
+        //public void ParserReturns2Rovers()
+        //{
+        //    InputParser parser = new InputParser();
+        //    string testPlateau = " 5 5 ";
+        //    string firstRover = "1 2 N";
+        //    string firstInstructions = "LMLMLMLMM";
+        //    string secondRover = "3 3 E";
+        //    string secondInstructions = "MMRMMRMRRM";
+
+        //    string output1 = "1 3 N";
+        //    string output2 = "5 1 E";
+
+        //}
+    }
+    
 }
+
+

@@ -11,12 +11,21 @@ namespace MarsRover.TerminalApp.Input_classes
     public record Position(int xPosition, int yPosition, CompassDirection direction);
 
     public record Plateau(int xAxis, int yAxis);
-        
-    public record Instruction(List<Instructs> instructs);
 
-    public class InputClasses
+    public class InputStringObject
     {
-       
+        public string PlateauStr
+        { get; set; }
+        public string PositionStr
+        { get; set; }
+        public string InstructionStr
+        { get; set; }
+        public InputStringObject()
+        {
+            PlateauStr = "";
+            PositionStr = "";
+            InstructionStr = "";
+        }
     }
 
 }

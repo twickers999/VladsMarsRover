@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MarsRover.TerminalApp.Input_classes.InputClasses;
+using MarsRover.TerminalApp.Input_classes;
 
 using static MarsRover.TerminalApp.InputEnums;
 
