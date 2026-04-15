@@ -11,25 +11,29 @@ namespace MarsRover.TerminalApp.RoverLogic
 {
     public class Logic
     {
-        public void Move(Position position)
+        public Position Move(Position position)
         {
-            int d = position.direction;
-            if (position.direction = 0)
+            int d = (int)position.direction;
+            int x = (int)position.xPosition;
+            int y = (int)position.yPosition;
+            if (d == 1)
             {
-                position.xPosition += 1;
-                if (position.direction = 1)
+                x += 1;
+                if (d == 1)
                 {
-                    position.yPosition += 1;
-                    if (position.direction = 2)
+                    y += 1;
+                     if (d == 2)
                     {
-                        position.xPosition -= 1;
-                        if (position.direction = 3)
+                        x -= 1;
+                         if (d == 3)
                         {
-                            position.yPosition -= 1;
+                            y -= 1;
                         }
                     }
                 }
             }
+            Position updatedPosition = new Position(x, y, (CompassDirection)d);
+            return updatedPosition;
         }
 
         public void CreatePlateau(Rover rover) 
@@ -50,37 +54,7 @@ namespace MarsRover.TerminalApp.RoverLogic
             }
                     
         
-       public CompassDirection Rotate(CompassDirection point, Instructs instructs)
-        {
-            int pointIndex = (int)point;
-            int directionIndex = (int)instructs;
-            if (instructs == Instructs.M)
-            {
-                directionIndex = 0;
-                if (instructs == Instructs.L)
-                {
-                    directionIndex = -1;
-                    if (instructs == Instructs.R)
-                    {
-                        directionIndex = 1;
-                    }
-                }
-            }
-
-            int NewIndex = directionIndex + pointIndex;
-
-            if (NewIndex == 4) //west
-            {
-                NewIndex = 0;//north
-            }
-            if (NewIndex == -1)//north to west
-            {
-                NewIndex = 3;//west
-            }
-            var newDirection = (CompassDirection)NewIndex;
-            return newDirection;
-        }
-         return rover;
+       
 
     }
 

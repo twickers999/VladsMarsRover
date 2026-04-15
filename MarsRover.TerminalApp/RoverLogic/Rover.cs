@@ -17,6 +17,9 @@ namespace MarsRover.TerminalApp.RoverLogic
         public readonly List<Instructs> instruction;
 
         public readonly Plateau plateau;
+        
+        public Position? currentPosition {get;set;}
+
         public Rover(Position _position, List<Instructs> _instruction, Plateau _plateau)
         {
             this.instruction = _instruction;

@@ -10,11 +10,6 @@ namespace MarsRover.TerminalApp.RoverLogic
 
     public class Compass
     {
-        public CompassDirection Point { get; set; }
-        public Compass(CompassDirection point)
-        {
-            Point = point;
-        }
         public CompassDirection Rotate(CompassDirection point, Instructs instructs)
         {
             int pointIndex = (int)point;
@@ -42,8 +37,8 @@ namespace MarsRover.TerminalApp.RoverLogic
             {
                 NewIndex = 3;//west
             }
-            Point = (CompassDirection)NewIndex;
-            return Point;
+            CompassDirection newDirection = (CompassDirection)NewIndex;
+            return newDirection;
         }
     }
  }
