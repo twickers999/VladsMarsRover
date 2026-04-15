@@ -14,7 +14,7 @@ namespace MarsRover.TerminalApp.RoverLogic
         
         public Rover BlackBox(Rover rover)
         {
-            Position p = rover.currentPosition;
+            Position p = rover.position;
 
             foreach (Instructs instruct in rover.instruction)
             {
@@ -24,7 +24,8 @@ namespace MarsRover.TerminalApp.RoverLogic
                 {
                     pNew = Move(pNew);
                 }
-                rover.currentPosition = pNew;
+                rover.position = pNew;
+                
             }
             return rover;
 

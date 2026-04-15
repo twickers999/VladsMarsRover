@@ -135,7 +135,7 @@ namespace MarsRover.TerminalApp.Input_classes
                             .AddInstruction(newParser.InstructionParser(StringObject.InstructionStr))
                             .Build();
 
-            rover.currentPosition = rover.position;
+            rover.StoredPosition = rover.position;
             activeSpace.Rovers.Add(rover);
             return rover;
         }

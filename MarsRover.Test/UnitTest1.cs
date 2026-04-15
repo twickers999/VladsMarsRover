@@ -188,18 +188,18 @@ namespace MarsRover.Test
         //}
         [Test]
 
-        public void PlateauInputValidator()
+        public void BlackboxValidator()
         {
-            UI ui = new UI();  
-            Logic  logic = new Logic();
-         string testPlateau = "5 5";
-         string firstRover = "1 2 N";
-         string firstInstructions = "LMLMLMLMM";
-         string secondRover = "3 3 E";
-         string secondInstructions = "MMRMMRMRRM";
+            UI ui = new UI();
+            Logic logic = new Logic();
+            string testPlateau = "5 5";
+            string firstRover = "1 2 N";
+            string firstInstructions = "LMLMLMLMM";
+            string secondRover = "3 3 E";
+            string secondInstructions = "MMRMMRMRRM";
 
-         string[] inputMocks = [
-               "5 5",
+            string[] inputMocks = [
+                  "5 5",
                "1 2 N",
                "LMLMLMLMM",
               ];
@@ -210,10 +210,18 @@ namespace MarsRover.Test
                             .AddInstruction(ui.newParser.InstructionParser(firstInstructions))
                             .Build();
             rover = logic.BlackBox(rover);
-            
+            string output1 = "1 3 N";
+            Rover roverExpected = new Rover(ui.newParser.PositionParser(firstRover),  ui.newParser.InstructionParser(firstInstructions),ui.newParser.PlateauParser(testPlateau));
+            Assert.That(rover, Is.EqualTo(roverExpected));
         }
-    
+        
+        
+
+        
+
     }
+    
+    
     
 }
 

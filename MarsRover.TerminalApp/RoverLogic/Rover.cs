@@ -11,14 +11,14 @@ using static MarsRover.TerminalApp.InputEnums;
 namespace MarsRover.TerminalApp.RoverLogic
 {
     public class Rover
-    {
-        public readonly Position position;
+    {//This should probably be readonly but i cant get it to work otherwise.
+        public  Position position;
 
         public readonly List<Instructs> instruction;
 
         public readonly Plateau plateau;
         
-        public Position? currentPosition {get;set;}
+        public Position? StoredPosition {get;set;}
 
         public Rover(Position _position, List<Instructs> _instruction, Plateau _plateau)
         {

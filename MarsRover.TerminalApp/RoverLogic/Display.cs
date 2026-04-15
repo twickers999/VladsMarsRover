@@ -10,20 +10,21 @@ namespace MarsRover.TerminalApp.RoverLogic
     {
         public static void PrintRover(Rover rover)
         {
-            Console.WriteLine(rover.position.ToString());
-            if(rover.position.direction == InputEnums.CompassDirection.N)
+            var p = rover.position;
+            Console.WriteLine(p.ToString());
+            if (p.direction == InputEnums.CompassDirection.N)
             {
                 Console.WriteLine(" ^"+"\n 0");
             }
-            if (rover.position.direction == InputEnums.CompassDirection.W)
+            if (p.direction == InputEnums.CompassDirection.W)
             {
                 Console.WriteLine("<0");
             }
-            if (rover.position.direction == InputEnums.CompassDirection.S)
+            if (p.direction == InputEnums.CompassDirection.S)
             {
                 Console.WriteLine(" 0" + "\n v");
             }
-            if (rover.position.direction == InputEnums.CompassDirection.E)
+            if (p.direction == InputEnums.CompassDirection.E)
             {
                 Console.WriteLine("0>");
             }
