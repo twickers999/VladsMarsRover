@@ -6,5 +6,5 @@ using MarsRover.TerminalApp.RoverLogic;
 
 UI ui = new UI();
 ui.StartUp();
-Display.PrintRover(ui.activeSpace.Rovers[1]);
+Display.PrintRover(ui.activeSpace.Rovers[0]);
 //Logic.PrintExes(, );

@@ -13,17 +13,17 @@ namespace MarsRover.TerminalApp.RoverLogic
             Console.WriteLine(rover.position.ToString());
             if(rover.position.direction == InputEnums.CompassDirection.N)
             {
-                Console.WriteLine("^"+"\n 0");
+                Console.WriteLine(" ^"+"\n 0");
             }
             if (rover.position.direction == InputEnums.CompassDirection.W)
             {
                 Console.WriteLine("<0");
             }
-            if (rover.position.direction == InputEnums.CompassDirection.N)
+            if (rover.position.direction == InputEnums.CompassDirection.S)
             {
-                Console.WriteLine("0" + "\n v");
+                Console.WriteLine(" 0" + "\n v");
             }
-            if (rover.position.direction == InputEnums.CompassDirection.W)
+            if (rover.position.direction == InputEnums.CompassDirection.E)
             {
                 Console.WriteLine("0>");
             }
