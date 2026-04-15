@@ -35,6 +35,7 @@ namespace MarsRover.TerminalApp.RoverLogic
 
             public Plateau Plateau { get; set; }
 
+
             public Builder() { }
            
             public Builder AddPlateau(Plateau plateau)

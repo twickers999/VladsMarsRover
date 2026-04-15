@@ -11,6 +11,24 @@ namespace MarsRover.TerminalApp.RoverLogic
 {
     public class Logic
     {
+        
+        public Rover BlackBox(Rover rover)
+        {
+            Position p = rover.currentPosition;
+
+            foreach (Instructs instruct in rover.instruction)
+            {
+               CompassDirection direction = Rotate(p.direction,instruct);
+                Position pNew = new Position(p.xPosition,p.yPosition, direction);
+                if(instruct == Instructs.M)
+                {
+                    pNew = Move(pNew);
+                }
+                rover.currentPosition = pNew;
+            }
+            return rover;
+
+        }
         public Position Move(Position position)
         {
             int d = (int)position.direction;
@@ -35,59 +53,41 @@ namespace MarsRover.TerminalApp.RoverLogic
             Position updatedPosition = new Position(x, y, (CompassDirection)d);
             return updatedPosition;
         }
-
-        public void CreatePlateau(Rover rover) 
+        public CompassDirection Rotate(CompassDirection point, Instructs instructs)
         {
-           
-
-        }
-        public Rover BlackBox(Rover rover)
-        {
-            Plateau plateau = rover.plateau;
-            Position position = rover.position;
-            List<Instructs> i = rover.instruction;
-
-           
-            foreach (Instructs inst in rover.instruction)
+            int pointIndex = (int)point;
+            int directionIndex = (int)instructs;
+            if (instructs == Instructs.M)
             {
-                Rotate(inst);
+                directionIndex = 0;
+                if (instructs == Instructs.L)
+                {
+                    directionIndex = -1;
+                    if (instructs == Instructs.R)
+                    {
+                        directionIndex = 1;
+                    }
+                }
             }
-                    
+
+            int NewIndex = directionIndex + pointIndex;
+
+            if (NewIndex == 4) //west
+            {
+                NewIndex = 0;//north
+            }
+            if (NewIndex == -1)//north to west
+            {
+                NewIndex = 3;//west
+            }
+            CompassDirection newDirection = (CompassDirection)NewIndex;
+            return newDirection;
+        }
         
-       
 
     }
 
 
 }
         
-            //public static void PrintExes(int xAxis, int yAxis)
-            //{
-            //char[,] arr = new char[xAxis, yAxis];
-
-
-            //for (int i = 0; i < xAxis; i++)
-            //{
-            //    arr[i, 0] = '+';
-
-            //    for (int j = 1; j < yAxis; j++)
-            //    {
-            //        arr[i, j] = '+';
-            //    }
-            //}
-            //string[] forPrinting = new string[xAxis];
-
-            //for (int i = 0; i < yAxis; i++)
-            //{
-            //    string combined = "";
-            //    for (int j = 0; j < xAxis; j++)
-            //    {
-            //        combined += arr[i, j];
-            //    }
-            //    Console.WriteLine(combined);
-            //}
-
-            //}
-        
-   // }
-//}
+            

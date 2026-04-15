@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MarsRover.TerminalApp.RoverLogic
+{
+    public class ActiveSpace
+    {
+        public List<Rover> Rovers = new List<Rover>();
+
+        //public ActiveSpace(List<Rover> rovers) 
+        //{
+        //    Rovers = rovers;
+        //}
+
+    }
+}

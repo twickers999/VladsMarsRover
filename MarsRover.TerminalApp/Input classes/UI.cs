@@ -14,7 +14,9 @@ namespace MarsRover.TerminalApp.Input_classes
 
             public InputParser newParser = new InputParser();
 
-            public TestingToggle toggle = new TestingToggle(false);
+            public ActiveSpace activeSpace = new ActiveSpace();
+
+            public TestingToggle toggle = new TestingToggle(true);
 
         public void StartUp()
         {
@@ -26,7 +28,7 @@ namespace MarsRover.TerminalApp.Input_classes
                 {
                      PositionInput(newParser.PositionIsValid, StringObject);
 
-                    if (newParser.PositionIsValid)
+                    if (newParser.PositionIsValid && !newParser.InstructionIsValid)
                     {
                          InstructionInput(newParser.InstructionIsValid, StringObject);
 
@@ -127,14 +129,15 @@ namespace MarsRover.TerminalApp.Input_classes
         }
         public Rover BuildRover()
         {
-            Rover RoverA = new Rover.Builder()
+            Rover rover = new Rover.Builder()
                             .AddPlateau(newParser.PlateauParser(StringObject.PlateauStr))
                             .AddPosition(newParser.PositionParser(StringObject.PositionStr))
                             .AddInstruction(newParser.InstructionParser(StringObject.InstructionStr))
                             .Build();
 
-                            RoverA.currentPosition = RoverA.position;
-            return RoverA;
+            rover.currentPosition = rover.position;
+            activeSpace.Rovers.Add(rover);
+            return rover;
         }
     }
 }

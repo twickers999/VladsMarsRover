@@ -191,6 +191,7 @@ namespace MarsRover.Test
         public void PlateauInputValidator()
         {
             UI ui = new UI();  
+            Logic  logic = new Logic();
          string testPlateau = "5 5";
          string firstRover = "1 2 N";
          string firstInstructions = "LMLMLMLMM";
@@ -208,7 +209,7 @@ namespace MarsRover.Test
                             .AddPosition(ui.newParser.PositionParser(firstRover))
                             .AddInstruction(ui.newParser.InstructionParser(firstInstructions))
                             .Build();
-            rover = Logic.BlackBox(rover);
+            rover = logic.BlackBox(rover);
             
         }
     

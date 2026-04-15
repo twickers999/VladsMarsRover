@@ -41,7 +41,7 @@ namespace MarsRover.TerminalApp.Input_classes
         }
         public bool InstructionIsValidCheck(string input)
         {
-            bool check = Regex.IsMatch(input, @"^\s*([LRMlrm]+)\s*,?\s*$");
+            bool check = Regex.IsMatch(input, @"^[LRMlrm]+$", RegexOptions.IgnoreCase);
 
             InstructionIsValid = check;
 
@@ -50,9 +50,18 @@ namespace MarsRover.TerminalApp.Input_classes
 
         public  List<Instructs> InstructionParser(string inputString)
         {
-            List<Instructs> instructsList = inputString.ToUpper().Where(x => x == 'L' || x == 'R' || x == 'M')
-            .Select(x => Enum.Parse<Instructs>(x.ToString()))
-            .ToList();
+            //List<Instructs> instructsList = inputString.Trim().ToUpper().Where(x => x == 'L' || x == 'R' || x == 'M')
+            //.Select(x => Enum.Parse<Instructs>(x.ToString()))
+            //.ToList();
+            char[] chars = inputString.ToUpper().Trim().ToCharArray();
+            List<Instructs> instructsList = chars.Select(c => c switch
+            {
+                'L' => Instructs.L,
+                'R' => Instructs.R,
+                'M' => Instructs.M,
+                _ => throw new InvalidOperationException()
+            }).ToList();
+        
             //List<Instruction> instructionList = new List<Instruction>();
             //foreach (var instruct in instructsList)
             //{
