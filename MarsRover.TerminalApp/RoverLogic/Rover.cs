@@ -12,9 +12,9 @@ namespace MarsRover.TerminalApp.RoverLogic
 {
     public class Rover
     {//This should probably be readonly but i cant get it to work otherwise.
-        public  Position position;
+        public Position position;
 
-        public readonly List<Instructs> instruction;
+        public  List<Instructs> instruction;
 
         public readonly Plateau plateau;
         
